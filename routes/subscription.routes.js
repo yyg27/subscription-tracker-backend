@@ -2,18 +2,16 @@ import { Router } from "express";
 import authorize from "../middlewares/auth.middleware.js";
 import {
   createSubscription,
+  getAllSubscriptions,
+  getSubscriptionDetails,
   getUserSubscriptions,
 } from "../controllers/subscription.controller.js";
 
 const subscriptionRouter = Router();
 
-subscriptionRouter.get("/", (reg, res) =>
-  res.send({ title: "GET all subscriptions" })
-);
+subscriptionRouter.get("/", getAllSubscriptions);
 
-subscriptionRouter.get("/:id", (reg, res) =>
-  res.send({ title: "GET subscription details" })
-);
+subscriptionRouter.get("/:id",authorize,getSubscriptionDetails);
 
 subscriptionRouter.post("/", authorize, createSubscription);
 
@@ -26,7 +24,6 @@ subscriptionRouter.delete("/:id", (reg, res) =>
 );
 
 subscriptionRouter.get("/user/:id", authorize, getUserSubscriptions);
-//TODO: "message": "Unauthorized!! User's don't match" ERROR. FIX LATER 
 
 subscriptionRouter.put("/:id/cancel", (reg, res) =>
   res.send({ title: "CANCEL subscription" })

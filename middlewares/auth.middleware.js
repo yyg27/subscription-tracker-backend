@@ -6,7 +6,7 @@ import User from "../models/user.model.js";
 const authorize = async (req, res, next) => {
   try {
     let token;
-    console.log("Authorization Header:", req.headers.authorization);  // <-- Bu satırı ekledikccc
+    console.log("Authorization Header:", req.headers.authorization);  // <-- ERROR LOG 
     //when you pass a token in the header, it starts with BEARER so we check if it starts with BEARER
     if (
       req.headers.authorization &&
@@ -20,7 +20,7 @@ const authorize = async (req, res, next) => {
     }
 
     const decoded = jwt.verify(token, JWT_SECRET); //verify the token
-    console.log("Decoded Token:", decoded); // <-- Bu satırı ekledik
+    console.log("Decoded Token:", decoded); // <-- ERROR LOG
 
     //check if the user exists in the database
 
@@ -36,7 +36,7 @@ const authorize = async (req, res, next) => {
     next();
 
   } catch (error) {
-    console.error("JWT Verify Error:", error.message);  // <-- Hata logu
+    console.error("JWT Verify Error:", error.message);  // ERROR LOG
     res.status(401).json({ message: "Unauthorized", error: error.message });
     next(error);
   }

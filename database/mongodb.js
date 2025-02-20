@@ -6,14 +6,15 @@ if(!DB_URI){
     throw new Error("Please define the MONGODB_URI environment variable inside .env<development/production>.local");
 }
 
-const connectToDatabase = async() =>{ //Function to connect mongoose to the database
+//Function to connect mongoose to the database
+const connectToDatabase = async() =>{ 
     try{
         await mongoose.connect(DB_URI);
         console.log(`Connected to database in ${NODE_ENV} mode.`);
     }catch(error){
-        console.log("Error! Connecting to database: ",error)
+        console.log("Error! Connecting to database: ", error)
         process.exit(1);
-    }
+    }    
 }
 
 export default connectToDatabase;

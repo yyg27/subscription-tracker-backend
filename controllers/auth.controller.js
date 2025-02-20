@@ -96,7 +96,13 @@ export const signIn = async (req, res, next) => {
   }
 };
 
-//TODO: Implement the signOut controller function
-export const signOut = async (req, res, next) => {};
+//TODO: Implement the signOut controller function with Blacklist method
+export const signOut = async (req, res, next) => {
+  try {
+    res.status(222).json({ success: true, message: "User logged out successfully" });
+  } catch (error) {
+    next(error);
+  }
+};
 
 
